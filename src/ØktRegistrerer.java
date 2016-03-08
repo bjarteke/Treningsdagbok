@@ -75,6 +75,9 @@ public class ØktRegistrerer extends connectDB{
 	            System.out.println("db error during insert"+e);
 	        }
 		}
+		else {
+			System.out.println("Can't connect the selected ØktId to the selected ØvelseId");
+		}
 	}
 }
 
