@@ -22,12 +22,12 @@ public class ØktRegistrerer extends connectDB{
 		return "'" + s + "'";
 	}
 	
-	public void registerUteØkt(String tidspunkt, String varighet, String kommentar, String prestasjon, String aktivitet, String temperatur, String vær){
+	public void registerUteØkt(String tidspunkt, String varighet, String kommentar, String prestasjon, String temperatur, String vær){
 		 try {
 			 String newID = getNextØktId();
-			 registerØkt(newID, tidspunkt, varighet, kommentar, prestasjon, aktivitet);             
+			 registerØkt(newID, tidspunkt, varighet, kommentar, prestasjon, "ute");             
 			 
-			 String s = "INSERT INTO utendørsaktivitet(øktid, aktivitet,temperatur,vær) VALUES"+ "(" + newID + "," + addFnutts(aktivitet) +","+ temperatur +","+ addFnutts(vær)+");";
+			 String s = "INSERT INTO utendørsaktivitet(øktid, aktivitet,temperatur,vær) VALUES"+ "(" + newID + "," + "'ute'" +","+ temperatur +","+ addFnutts(vær)+");";
 			 java.sql.PreparedStatement pstmt = conn.prepareStatement(s);
 			 pstmt.execute();
 
@@ -37,19 +37,18 @@ public class ØktRegistrerer extends connectDB{
 		
 	}
 	
-	public void registerInneØkt(String tidspunkt, String varighet, String kommentar, String prestasjon, String aktivitet, String luftkvalitet, String tilskuere){
-		 try {
+	public void registerInneØkt(String tidspunkt, String varighet, String kommentar, String prestasjon, String luftkvalitet, String tilskuere){
+		try {
 			 String newID = getNextØktId();
-			 registerØkt(newID, tidspunkt, varighet, kommentar, prestasjon, aktivitet);             
+			 registerØkt(newID, tidspunkt, varighet, kommentar, prestasjon, "inne");             
 			 
-			 String s = "INSERT INTO innendørsaktivitet(øktid, aktivitet,luftkvalitet,tilskuere) VALUES"+ "(" + newID + "," + addFnutts(aktivitet) +","+ addFnutts(luftkvalitet) +","+ tilskuere+");";
+			 String s = "INSERT INTO innendørsaktivitet(øktid, aktivitet,luftkvalitet,tilskuere) VALUES"+ "(" + newID + "," + "'inne'" +","+ addFnutts(luftkvalitet) +","+ tilskuere+");";
 			 java.sql.PreparedStatement pstmt = conn.prepareStatement(s);
 			 pstmt.execute();
 
         } catch (Exception e) {
             System.out.println("db error during insert"+e);
         }
-		
 	}
 	
 	public String getNextØktId() throws SQLException{
