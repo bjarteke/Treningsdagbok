@@ -72,7 +72,6 @@ public class Main {
         
         
         
-        
         //su.registerUteØkt("2016-03-07", "0.5", "Bra økt", "5", "24", "Skyet");
         //su.registerInneØkt("2016-08-03", "0.8", "bra økt", "10", "dårlig", "25");
     }
