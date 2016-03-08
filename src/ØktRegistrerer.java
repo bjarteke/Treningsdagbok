@@ -49,11 +49,32 @@ public class ØktRegistrerer extends connectDB{
         }
 	}
 	
-	public String getNextØktId() throws SQLException{
+	public String getNextØktId() throws SQLException {
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT COUNT(*) from økt");
 		rs.next();
 		return rs.getString(1);      	
+	}
+	
+	public int getNumberOfØvelser() throws SQLException {
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT COUNT(*) from øvelse");
+		rs.next();
+		return Integer.parseInt(rs.getString(1))-1;
+	}
+	
+	
+	public void connectØktToØvelse(int ØktId, int ØvelseId, String resultat) throws NumberFormatException, SQLException {
+		if (ØktId < Integer.parseInt(getNextØktId()) && ØvelseId <= getNumberOfØvelser() ){
+			try {   
+				 String s = "INSERT INTO øktøvelse(øktid, øvelseid,resultat) VALUES"+ "(" + Integer.toString(ØktId) + "," + Integer.toString(ØvelseId) +","+ addFnutts(resultat) +");";
+				 java.sql.PreparedStatement pstmt = conn.prepareStatement(s);
+				 pstmt.execute();
+
+	        } catch (Exception e) {
+	            System.out.println("db error during insert"+e);
+	        }
+		}
 	}
 	
 }
