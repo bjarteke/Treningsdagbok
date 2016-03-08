@@ -61,8 +61,8 @@ public class Main {
         		
         }
         scanner.close();
-        
         	
+        
         
         //Alternativer til til å gjøre, går i loop.
         //Legg til økt --> koble økt til øvelse(r)
