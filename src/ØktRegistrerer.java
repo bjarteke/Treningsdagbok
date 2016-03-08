@@ -37,10 +37,6 @@ public class ØktRegistrerer extends connectDB{
 		
 	}
 	
-	/*public void registerInneØkt(String dato, String varighet, String kommentar, String prestasjon, String aktivitet, String luftkvalitet, String tilskuere) {
-		registerØkt(dato, varighet, kommentar, prestasjon,aktivitet);
-	}*/
-	
 	public void registerInneØkt(String tidspunkt, String varighet, String kommentar, String prestasjon, String aktivitet, String luftkvalitet, String tilskuere){
 		 try {
 			 String newID = getNextØktId();
