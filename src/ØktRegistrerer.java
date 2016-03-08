@@ -2,8 +2,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import com.mysql.jdbc.PreparedStatement;
-
 public class ØktRegistrerer extends connectDB{
 	
 	private void registerØkt(String ID, String tidspunkt, String varighet, String kommentar, String prestasjon, String aktivitet){
@@ -55,8 +53,7 @@ public class ØktRegistrerer extends connectDB{
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT COUNT(*) from økt");
 		rs.next();
-		return rs.getString(1);
-        	
+		return rs.getString(1);      	
 	}
 	
 }
