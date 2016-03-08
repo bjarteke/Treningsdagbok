@@ -37,14 +37,29 @@ public class ØktRegistrerer extends connectDB{
 		
 	}
 	
-	/*public void registrerInneØkt(String dato, String varighet, String kommentar, String prestasjon, String aktivitet, String luftkvalitet, String tilskuere) {
+	/*public void registerInneØkt(String dato, String varighet, String kommentar, String prestasjon, String aktivitet, String luftkvalitet, String tilskuere) {
 		registerØkt(dato, varighet, kommentar, prestasjon,aktivitet);
 	}*/
+	
+	public void registerInneØkt(String tidspunkt, String varighet, String kommentar, String prestasjon, String aktivitet, String luftkvalitet, String tilskuere){
+		 try {
+			 String newID = getNextØktId();
+			 registerØkt(newID, tidspunkt, varighet, kommentar, prestasjon, aktivitet);             
+			 
+			 String s = "INSERT INTO innendørsaktivitet(øktid, aktivitet,luftkvalitet,tilskuere) VALUES"+ "(" + newID + "," + addFnutts(aktivitet) +","+ addFnutts(luftkvalitet) +","+ tilskuere+");";
+			 java.sql.PreparedStatement pstmt = conn.prepareStatement(s);
+			 pstmt.execute();
+
+        } catch (Exception e) {
+            System.out.println("db error during insert"+e);
+        }
+		
+	}
 	
 	public String getNextØktId() throws SQLException{
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT COUNT(*) from økt");
-		System.out.println(rs.next());
+		rs.next();
 		return rs.getString(1);
         	
 	}
