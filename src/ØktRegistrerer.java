@@ -60,11 +60,11 @@ public class ØktRegistrerer extends connectDB{
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT COUNT(*) from øvelse");
 		rs.next();
-		return Integer.parseInt(rs.getString(1))-1;
+		return Integer.parseInt(rs.getString(1));
 	}
 	
 	
-	public void connectØktToØvelse(int ØktId, int ØvelseId, String resultat) throws NumberFormatException, SQLException {
+	public void connectØktToØvelse(int ØktId, int ØvelseId, String resultat) throws NumberFormatException, SQLException {		
 		if (ØktId < Integer.parseInt(getNextØktId()) && ØvelseId <= getNumberOfØvelser() ){
 			try {   
 				 String s = "INSERT INTO øktøvelse(øktid, øvelseid,resultat) VALUES"+ "(" + Integer.toString(ØktId) + "," + Integer.toString(ØvelseId) +","+ addFnutts(resultat) +");";
