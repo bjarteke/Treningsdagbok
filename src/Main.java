@@ -62,7 +62,6 @@ public class Main {
         }
         scanner.close();
         
-        
         	
         
         //Alternativer til til å gjøre, går i loop.
