@@ -8,7 +8,8 @@ public class ØktRegistrerer extends connectDB{
 	
 	private void registerØkt(String tidspunkt, String varighet, String kommentar, String prestasjon, String aktivitet){
 		try {
-			String s = "INSERT INTO økt(øktid,dato,varighet,kommentar,prestasjon,aktivitet) VALUES (4,'2016-07-03',0.5,'hdjkash',10, 'ute');";
+			String s = "INSERT INTO økt(øktid,dato,varighet,kommentar,prestasjon,aktivitet) VALUES "
+					+ "(" + "4" + "," + addFnutts(tidspunkt) +","+ varighet +","+ addFnutts(kommentar) +","+ prestasjon +","+ addFnutts(aktivitet)+");";
 			java.sql.PreparedStatement pstmt = conn.prepareStatement(s);
 			pstmt.execute();
 			
@@ -22,6 +23,10 @@ public class ØktRegistrerer extends connectDB{
         } catch (Exception e) {
             System.out.println("db error during insert"+e);
         }
+	}
+	
+	private String addFnutts(String s){
+		return "'" + s + "'";
 	}
 	
 	public void registerUteØkt(String tidspunkt, String varighet, String kommentar, String prestasjon, String aktivitet, String temperatur, String vær){
