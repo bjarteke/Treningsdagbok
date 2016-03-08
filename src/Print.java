@@ -12,7 +12,7 @@ public class Print extends connectDB {
            rs.next();
            
            while(rs.next()){        	   
-    		   System.out.println(String.format("Dato: %s \nKommentar: %s \nVarighet: %s",rs.getString("dato"),rs.getString("kommentar"),rs.getString("varighet")));
+    		   System.out.println(String.format("Dato: %s \nKommentar: %s \nVarighet: %s",rs.getString("dato"),rs.getString("kommentar"),rs.getString("varighet")));
     		   System.out.println("");        		   
            }
        }
