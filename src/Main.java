@@ -6,27 +6,58 @@ public class Main {
         ØktRegistrerer su = new ØktRegistrerer();
         
         
-        //su.connect();
+        su.connect();
+        
   
         
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Hva vil du gjøre?");
         System.out.println();
-        System.out.println("Opprette økt:\t\t'økt'");
+        System.out.println("Opprette økt:\t\t'inneøkt' eller 'uteøkt'");
         System.out.println("Legge til øvelse:\t'øvelse'");
         System.out.println("Statistikk:\t\t'stat'");
-        System.out.println("Lese notater:\t\t'notat'");
+        System.out.println("Lese logg:\t\t'logg'");
         System.out.println("Se økt/øvelser:\t\t'se'");
         System.out.println("Avslutte:\t\t'avslutt'");
 
         System.out.println();
-        System.out.print("-> ");
         
         
-        String input = scanner.nextLine();
+        String input = "";
         while (!input.equals("avslutt")){
+        		System.out.print("-> ");
         		input = scanner.nextLine();
+        		String beskrivelse;
+        		String[] liste;
+        		
+        		switch(input){
+        		case "uteøkt":
+        			System.out.println("Skriv på format: dato, varighet, kommentar, prestasjon(1-10), temperatur, vær");
+        			beskrivelse = scanner.nextLine();
+        			liste = beskrivelse.split(", ");
+        			su.registerUteØkt(liste[0], liste[1], liste[2], liste[3], liste[4], liste[5]);
+        			break;
+        			
+        		case "inneøkt":
+        			System.out.println("Skriv på format: dato, varighet, kommentar, prestasjon(1-10), luftkvalitet, tilskuere");
+        			beskrivelse = scanner.nextLine();
+        			liste = beskrivelse.split(", ");
+        			su.registerInneØkt(liste[0], liste[1], liste[2], liste[3], liste[4], liste[5]);
+        			break;
+        			
+        		case "stat":
+        			
+        		case "logg":
+        			
+        		case "se":
+        			
+        		case "avslutt":
+        			break;
+        		
+        		default:
+        			System.out.println("Ugyldig kommando. Prøv igjen...");
+        		}
         		
         }
         scanner.close();
