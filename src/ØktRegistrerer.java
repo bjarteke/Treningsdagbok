@@ -76,6 +76,5 @@ public class ØktRegistrerer extends connectDB{
 	        }
 		}
 	}
-	
 }
 
