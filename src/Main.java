@@ -6,10 +6,33 @@ public class Main {
         ØktRegistrerer su = new ØktRegistrerer();
         
         
-        su.connect();
+        //su.connect();
   
         
         Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Hva vil du gjøre?");
+        System.out.println();
+        System.out.println("Opprette økt:\t\t'økt'");
+        System.out.println("Legge til øvelse:\t'øvelse'");
+        System.out.println("Statistikk:\t\t'stat'");
+        System.out.println("Lese notater:\t\t'notat'");
+        System.out.println("Se økt/øvelser:\t\t'se'");
+        System.out.println("Avslutte:\t\t'avslutt'");
+
+        System.out.println();
+        System.out.print("-> ");
+        
+        
+        String input = scanner.nextLine();
+        while (!input.equals("avslutt")){
+        		input = scanner.nextLine();
+        		
+        }
+        scanner.close();
+        
+        	
+        
         //Alternativer til til å gjøre, går i loop.
         //Legg til økt --> koble økt til øvelse(r)
         	//Når du har lagt til resultat, sjekk om dette er oppnådd
@@ -19,8 +42,8 @@ public class Main {
         
         
         
-        su.registerUteØkt("2016-03-07", "0.5", "Bra økt", "5", "24", "Skyet");
-        su.registerInneØkt("2016-08-03", "0.8", "bra økt", "10", "dårlig", "25");
+        //su.registerUteØkt("2016-03-07", "0.5", "Bra økt", "5", "24", "Skyet");
+        //su.registerInneØkt("2016-08-03", "0.8", "bra økt", "10", "dårlig", "25");
     }
 
 }
