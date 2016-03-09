@@ -16,7 +16,7 @@ public class ØktRegistrerer extends connectDB{
         }
 	}
 	
-	private String addFnutts(String s){
+	public static String addFnutts(String s){
 		return "'" + s + "'";
 	}
 	
