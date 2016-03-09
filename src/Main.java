@@ -5,8 +5,13 @@ public class Main {
     public static void main(String[] args) {        
         ØktRegistrerer su = new ØktRegistrerer();
         
-        
-        su.connect();
+        try{
+        	su.connect();
+        	
+        }catch(RuntimeException exception){
+        	System.out.println("Error. Not connected to database...");
+        	return;
+        }
         
   
         
@@ -45,6 +50,9 @@ public class Main {
         			liste = beskrivelse.split(", ");
         			su.registerInneØkt(liste[0], liste[1], liste[2], liste[3], liste[4], liste[5]);
         			break;
+        			
+        		case "øvelse":
+        			
         			
         		case "stat":
         			
