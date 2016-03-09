@@ -21,11 +21,5 @@ public class Print extends connectDB {
             System.out.println("db error during select of loper = "+e);
     	}
 
-    }
-    
-    public static void main(String[] args) {
-		Print p = new Print();
-		p.printTreningsøkt();
-	}
-  
+    }  
 }
