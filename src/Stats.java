@@ -6,6 +6,7 @@ public class Stats extends connectDB {
 		try {
 			Statement stmt = conn.createStatement();
 			ResultSet results = stmt.executeQuery("SELECT SUM(distanse) FROM kondisjonsøvelse;");
+			results.next();
 			double result = results.getFloat(1);
 			return (result/1000);
 		} catch (SQLException e) {
@@ -16,7 +17,17 @@ public class Stats extends connectDB {
 	
 	public static void main(String[] args) {
 		Stats stat = new Stats();
-		stat.getAntallKm();
+		try{
+        	stat.connect();
+        	
+        }catch(RuntimeException exception){
+        	System.out.println("Error. Not connected to database...");
+        	return;
+        }
+		
+		System.out.println(stat.getAntallKm());
+		
+		
 	}
 	
 	
