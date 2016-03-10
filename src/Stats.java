@@ -24,7 +24,16 @@ public class Stats extends connectDB {
 		
 		return result;
 	}
-
+	
+	public String getAverageResult(String øvelse) throws SQLException {
+		Statement stmt = conn.createStatement();
+		String query = "SELECT AVG(resultat) FROM øvelse inner join øktøvelse on øktøvelse.øvelseid WHERE navn=" + øvelse +",";
+		ResultSet results = stmt.executeQuery(query);
+		results.next();
+		String result = results.getString(1);
+		
+		return result;
+	}
 	
 	public static void main(String[] args) {
 		Stats stat = new Stats();
