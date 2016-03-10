@@ -15,6 +15,17 @@ public class Stats extends connectDB {
 		
 	}
 	
+	public String getBestResult(String øvelse) throws SQLException {
+		Statement stmt = conn.createStatement();
+		String query = "SELECT MIN(resultat) FROM øvelse inner join øktøvelse on øktøvelse.øvelseid WHERE navn=" + øvelse +",";
+		ResultSet results = stmt.executeQuery(query);
+		results.next();
+		String result = results.getString(1);
+		
+		return result;
+	}
+
+	
 	public static void main(String[] args) {
 		Stats stat = new Stats();
 		try{
