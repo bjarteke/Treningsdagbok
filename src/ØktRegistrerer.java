@@ -1,6 +1,10 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class ØktRegistrerer extends connectDB{
 	
@@ -56,6 +60,19 @@ public class ØktRegistrerer extends connectDB{
 		return rs.getString(1);      	
 	}
 	
+	public List<String> getØvelser() throws SQLException {
+		Statement stmt = conn.createStatement();
+		List<String> liste = new ArrayList<String>();
+		
+		ResultSet rs = stmt.executeQuery("SELECT navn from øvelse");
+		rs.next();
+		while (!rs.isAfterLast()){
+			liste.add(rs.getString(1));
+			rs.next();
+		}
+		return liste;
+	}
+	
 	public int getNumberOfØvelser() throws SQLException {
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT COUNT(*) from øvelse");
@@ -78,6 +95,17 @@ public class ØktRegistrerer extends connectDB{
 		else {
 			System.out.println("Can't connect the selected ØktId to the selected ØvelseId");
 		}
+	}
+	
+	public void printØkter() throws SQLException{
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT * from økt order by dato asc");
+		
+		System.out.println("ØktID   Dato           Varighet       Kommentar   Prestasjon    Inne/ute");
+		while(rs.next()){
+			System.out.println(rs.getString(1) + rs.getString(2) + rs.getString(3) + rs.getString(4) + rs.getString(5) + rs.getString(6));
+		}
+
 	}
 }
 

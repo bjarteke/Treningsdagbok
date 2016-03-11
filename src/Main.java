@@ -1,8 +1,16 @@
 import java.util.Scanner;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-public class Main {
+public class Main extends connectDB {
+	
+	private static void inp(){
+		System.out.print("-> ");
+	}
 
-    public static void main(String[] args) {        
+
+    public static void main(String[] args) throws SQLException {        
         ØktRegistrerer su = new ØktRegistrerer();
         
         try{
@@ -13,7 +21,9 @@ public class Main {
         	return;
         }
         
-  
+        su.printØkter();
+       
+        
         
         Scanner scanner = new Scanner(System.in);
         
@@ -31,27 +41,44 @@ public class Main {
         
         String input = "";
         while (!input.equals("avslutt")){
-        		System.out.print("-> ");
+        		inp();
         		input = scanner.nextLine();
         		String beskrivelse;
         		String[] liste;
         		
         		switch(input){
         		case "uteøkt":
-        			System.out.println("Skriv på format: dato, varighet, kommentar, prestasjon(1-10), temperatur, vær");
+        			System.out.println("Skriv på format: dato(yyyy-mm-dd), varighet, kommentar, prestasjon(1-10), temperatur, vær");
+        			inp();
         			beskrivelse = scanner.nextLine();
         			liste = beskrivelse.split(", ");
         			su.registerUteØkt(liste[0], liste[1], liste[2], liste[3], liste[4], liste[5]);
         			break;
         			
         		case "inneøkt":
-        			System.out.println("Skriv på format: dato, varighet, kommentar, prestasjon(1-10), luftkvalitet, tilskuere");
+        			System.out.println("Skriv på format: dato(yyyy-mm-dd), varighet, kommentar, prestasjon(1-10), luftkvalitet, tilskuere");
+        			inp();
         			beskrivelse = scanner.nextLine();
         			liste = beskrivelse.split(", ");
         			su.registerInneØkt(liste[0], liste[1], liste[2], liste[3], liste[4], liste[5]);
         			break;
         			
         		case "øvelse":
+        			System.out.println("ØvelsesIDer:");
+        			int i = 1;
+        			for (String øvelse : su.getØvelser()){
+        				
+        				System.out.println(i + ". " + øvelse);
+        				i++;
+        			}
+        			System.out.println();
+        			System.out.println("Skriv på format: øvelsesID, øktID, resultat");
+
+        			inp();
+        			beskrivelse = scanner.nextLine();
+        			liste = beskrivelse.split(", ");
+        			su.connectØktToØvelse(Integer.parseInt(liste[1]), Integer.parseInt(liste[0]), liste[2]);
+        			break;
         			
         			
         		case "stat":
@@ -59,6 +86,7 @@ public class Main {
         		case "logg":
         			
         		case "se":
+        			
         			
         		case "avslutt":
         			break;
