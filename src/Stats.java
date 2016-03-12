@@ -15,9 +15,9 @@ public class Stats extends connectDB {
 		
 	}
 	
-	public String getBestResult(String øvelse) throws SQLException {
+	public String getBestResult(int øvelseID) throws SQLException {
 		Statement stmt = conn.createStatement();
-		String query = "SELECT MIN(resultat) FROM øvelse inner join øktøvelse on øktøvelse.øvelseid WHERE navn=" + øvelse +",";
+		String query = "SELECT MIN(resultat) FROM øktøvelse WHERE øvelseid=" + øvelseID +";";
 		ResultSet results = stmt.executeQuery(query);
 		results.next();
 		String result = results.getString(1);
@@ -25,9 +25,9 @@ public class Stats extends connectDB {
 		return result;
 	}
 	
-	public String getAverageResult(String øvelse) throws SQLException {
+	public String getAverageResult(int øvelseID) throws SQLException {
 		Statement stmt = conn.createStatement();
-		String query = "SELECT AVG(resultat) FROM øvelse inner join øktøvelse on øktøvelse.øvelseid WHERE navn=" + øvelse +",";
+		String query = "SELECT AVG(resultat) FROM øktøvelse WHERE øvelseid=" + øvelseID +";";
 		ResultSet results = stmt.executeQuery(query);
 		results.next();
 		String result = results.getString(1);

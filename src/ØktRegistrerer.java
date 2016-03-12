@@ -101,11 +101,33 @@ public class ØktRegistrerer extends connectDB{
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT * from økt order by dato asc");
 		
-		System.out.println("ØktID   Dato           Varighet       Kommentar   Prestasjon    Inne/ute");
+		System.out.println("ØktID   Dato         Varighet   Kommentar   Prestasjon  Inne/ute");
+		System.out.println("----------------------------------------------------------------");
 		while(rs.next()){
-			System.out.println(rs.getString(1) + rs.getString(2) + rs.getString(3) + rs.getString(4) + rs.getString(5) + rs.getString(6));
+			System.out.println(rs.getString(1) + "\t" + rs.getString(2).split(" ")[0] + "   " + Float.parseFloat(rs.getString(3)) + "\t" + rs.getString(4) + "\t    " + rs.getString(5) + "\t        " + rs.getString(6));
 		}
 
+	}
+
+
+	public void printØvelserForØkt(int øktID) throws SQLException {
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT * from øvelse natural join øktøvelse where øktid=" + øktID +";");
+		
+		System.out.println("ØvelseID  Distanse       Beskrivelse            Repetisjoner     Resultat");
+		System.out.println("-------------------------------------------------------------------------");
+		while(rs.next()){
+			System.out.println(rs.getString(1) + "\t  " + rs.getString(2) + "\t " + rs.getString(3) + "\t" + rs.getString(4) + "\t         "  + rs.getString(6));
+		}
+		
+	}
+	
+	public String getØvelseFromID(int øvelseID) throws SQLException {
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT navn from øvelse where øvelseid=" + øvelseID +";");
+		rs.next();
+		return rs.getString(1);
+		
 	}
 }
 

@@ -20,9 +20,7 @@ public class Main extends connectDB {
         	System.out.println("Error. Not connected to database...");
         	return;
         }
-        
-        su.printØkter();
-       
+               
         
         
         Scanner scanner = new Scanner(System.in);
@@ -33,7 +31,8 @@ public class Main extends connectDB {
         System.out.println("Legge til øvelse:\t'øvelse'");
         System.out.println("Statistikk:\t\t'stat'");
         System.out.println("Lese logg:\t\t'logg'");
-        System.out.println("Se økt/øvelser:\t\t'se'");
+        System.out.println("Se alle økter:\t\t'se'");
+        System.out.println("Se øvelser for økt:\t'se øktID'");
         System.out.println("Avslutte:\t\t'avslutt'");
 
         System.out.println();
@@ -46,7 +45,7 @@ public class Main extends connectDB {
         		String beskrivelse;
         		String[] liste;
         		
-        		switch(input){
+        		switch(input.split(" ")[0]){
         		case "uteøkt":
         			System.out.println("Skriv på format: dato(yyyy-mm-dd), varighet, kommentar, prestasjon(1-10), temperatur, vær");
         			inp();
@@ -82,11 +81,31 @@ public class Main extends connectDB {
         			
         			
         		case "stat":
+        			Stats stat = new Stats();
+        			stat.connect();
+        			System.out.println("Totalt antall km: " + stat.getAntallKm());
+        			System.out.println();
+        			System.out.println("Øvelse        Beste resultat    Gjennomsnittlig resultat");
+        			System.out.println("--------------------------------------------------------");
+        			for (int j = 1; j < su.getNumberOfØvelser(); j++ ){
+        				
+        				System.out.format("%-14s%-18s%-16s", su.getØvelseFromID(j), stat.getBestResult(j), stat.getAverageResult(j));
+        				System.out.println();
+
+        			}
+        			break;
         			
         		case "logg":
         			
         		case "se":
-        			
+        			if (input.split(" ").length == 1){
+        				su.printØkter();
+        				break;        				
+        			}else{
+        				int øktID = Integer.parseInt(input.split(" ")[1]);
+        				su.printØvelserForØkt(øktID);
+        				break;
+        			}
         			
         		case "avslutt":
         			break;
