@@ -36,8 +36,7 @@ public class MålEditor extends connectDB{
 				return false;
 			}
 		}
-		return false;
-		
+		return false;	
 	}
 	
 	public String getNextMålId () throws SQLException{

@@ -1,14 +1,11 @@
 import java.util.Scanner;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class Main extends connectDB {
 	
 	private static void inp(){
 		System.out.print("-> ");
 	}
-
 
     public static void main(String[] args) throws SQLException {        
         ØktRegistrerer su = new ØktRegistrerer();
@@ -21,22 +18,19 @@ public class Main extends connectDB {
         	return;
         }
                
-        
-        
         Scanner scanner = new Scanner(System.in);
         
         System.out.println("Hva vil du gjøre?");
         System.out.println();
-        System.out.println("Opprette økt:\t\t'inneøkt' eller 'uteøkt'");
-        System.out.println("Legge til øvelse:\t'øvelse'");
-        System.out.println("Statistikk:\t\t'stat'");
-        System.out.println("Lese logg:\t\t'logg'");
-        System.out.println("Se alle økter:\t\t'se'");
-        System.out.println("Se øvelser for økt:\t'se øktID'");
-        System.out.println("Avslutte:\t\t'avslutt'");
+        System.out.println("Opprette økt:\t\t\t'inneøkt' eller 'uteøkt'");
+        System.out.println("Legge til øvelse:\t\t'øvelse'");
+        System.out.println("Statistikk:\t\t\t'stat'");
+        System.out.println("Lese logg:\t\t\t'logg'");
+        System.out.println("Se alle økter:\t\t\t'se'");
+        System.out.println("Beste resultat for øvelse: \t'bestØvelse'");
+        System.out.println("Avslutte:\t\t\t'avslutt'");
 
         System.out.println();
-        
         
         String input = "";
         while (!input.equals("avslutt")){
@@ -87,16 +81,14 @@ public class Main extends connectDB {
         			System.out.println();
         			System.out.println("Øvelse        Beste resultat    Gjennomsnittlig resultat");
         			System.out.println("--------------------------------------------------------");
-        			for (int j = 1; j < su.getNumberOfØvelser(); j++ ){
+        			for (int j = 1; j <= su.getNumberOfØvelser(); j++ ){
         				
         				System.out.format("%-14s%-18s%-16s", su.getØvelseFromID(j), stat.getBestResult(j), stat.getAverageResult(j));
         				System.out.println();
 
         			}
         			break;
-        			
-        		case "logg":
-        			
+
         		case "se":
         			if (input.split(" ").length == 1){
         				su.printØkter();
@@ -107,6 +99,30 @@ public class Main extends connectDB {
         				break;
         			}
         			
+        		case "bestØvelse":
+        			System.out.println("ØvelseID: \tNavn:");
+        			int j = 1;
+					for (String øvelse : su.getØvelser()){
+        				System.out.println(j + ". \t\t" + øvelse);
+        				j++;
+        			}
+					System.out.println("Skriv inn ønsket ØvelseID");
+        			inp();
+        			while(true){
+        				String øvelseID = scanner.nextLine();        				
+        				if(Integer.parseInt(øvelseID)<=su.getNumberOfØvelser()){
+        					String øvelse = su.getØvelseFromID(Integer.parseInt(øvelseID));
+        					System.out.println("Beste resultat på " + øvelse +": " + su.getBestResultFromØvelseID(Integer.parseInt(øvelseID)));
+        					break;
+        				}
+        				else {
+        					System.out.println("Ingen øvelse med angitt øvelseID. Prøv igjen...");
+        					inp();
+        				}
+        			
+        			}
+        			break;
+        			
         		case "avslutt":
         			break;
         		
@@ -116,19 +132,6 @@ public class Main extends connectDB {
         		
         }
         scanner.close();
-        	
-        
-        
-        //Alternativer til til å gjøre, går i loop.
-        //Legg til økt --> koble økt til øvelse(r)
-        	//Når du har lagt til resultat, sjekk om dette er oppnådd
-        //Se ti beste resultater fra gitt øvelse
-        //Se antall kilometer løpt
-        
-        
-        
-        //su.registerUteØkt("2016-03-07", "0.5", "Bra økt", "5", "24", "Skyet");
-        //su.registerInneØkt("2016-08-03", "0.8", "bra økt", "10", "dårlig", "25");
     }
 
 }

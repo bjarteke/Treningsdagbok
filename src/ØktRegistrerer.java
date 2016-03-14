@@ -2,8 +2,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class ØktRegistrerer extends connectDB{
@@ -64,7 +62,7 @@ public class ØktRegistrerer extends connectDB{
 		Statement stmt = conn.createStatement();
 		List<String> liste = new ArrayList<String>();
 		
-		ResultSet rs = stmt.executeQuery("SELECT navn from øvelse");
+		ResultSet rs = stmt.executeQuery("SELECT navn from øvelse ORDER BY øvelseId ASC");
 		rs.next();
 		while (!rs.isAfterLast()){
 			liste.add(rs.getString(1));
@@ -128,6 +126,13 @@ public class ØktRegistrerer extends connectDB{
 		rs.next();
 		return rs.getString(1);
 		
+	}
+	
+	public String getBestResultFromØvelseID(int øvelseID) throws SQLException{
+		Statement stmt = conn.createStatement();
+		ResultSet rs = stmt.executeQuery("SELECT MIN(resultat) from øvelse natural join øktøvelse where øvelseid=" + øvelseID +";");
+		rs.next();
+		return rs.getString(1);
 	}
 }
 

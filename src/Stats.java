@@ -33,22 +33,6 @@ public class Stats extends connectDB {
 		String result = results.getString(1);
 		
 		return result;
-	}
-	
-	public static void main(String[] args) {
-		Stats stat = new Stats();
-		try{
-        	stat.connect();
-        	
-        }catch(RuntimeException exception){
-        	System.out.println("Error. Not connected to database...");
-        	return;
-        }
-		
-		System.out.println(stat.getAntallKm());
-		
-		
-	}
-	
+	}	
 	
 }
