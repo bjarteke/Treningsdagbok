@@ -25,7 +25,6 @@ public class Main extends connectDB {
         System.out.println("Opprette økt:\t\t\t'inneøkt' eller 'uteøkt'");
         System.out.println("Legge til øvelse:\t\t'øvelse'");
         System.out.println("Statistikk:\t\t\t'stat'");
-        System.out.println("Lese logg:\t\t\t'logg'");
         System.out.println("Se alle økter:\t\t\t'se'");
         System.out.println("Beste resultat for øvelse: \t'bestØvelse'");
         System.out.println("Avslutte:\t\t\t'avslutt'");
